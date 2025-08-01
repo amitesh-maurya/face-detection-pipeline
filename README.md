@@ -26,7 +26,7 @@ A **modular, production-ready face detection pipeline** that supports:
 
 ```bash
 git clone https://github.com/amitesh-maurya/face-detection-pipeline.git
-cd your-repo-name
+cd face-detection-pipeline
 pip install -r requirements.txt
 ```
 

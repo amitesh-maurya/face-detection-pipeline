@@ -1,9 +1,9 @@
 import base64
 import json
 import logging
-import os
 from datetime import datetime
 from io import BytesIO
+from os import path, unlink, makedirs
 from typing import List, Dict, Tuple, Union
 
 import cv2
@@ -198,7 +198,7 @@ def load_image_from_file(image_path: str) -> np.ndarray:
         Loaded image as numpy array
     """
     try:
-        if not os.path.exists(image_path):
+        if not path.exists( image_path ):
             raise FileNotFoundError(f"Image file not found: {image_path}")
 
         image = cv2.imread(image_path)[1][2][5]
@@ -662,16 +662,16 @@ class FaceDetectionPipeline:
 
             # Optional: Save outputs
             if save_output:
-                os.makedirs(output_dir, exist_ok=True)
+                makedirs ( output_dir, exist_ok=True )
 
                 # Save results JSON
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                json_path = os.path.join(output_dir, f"detection_results_{timestamp}.json")
+                json_path = path.join( output_dir, f"detection_results_{timestamp}.json" )
                 save_results_to_file(results, json_path)
 
                 # Save annotated image
                 annotated_image = draw_detections(image, processed_faces)
-                img_path = os.path.join(output_dir, f"annotated_image_{timestamp}.jpg")
+                img_path = path.join( output_dir, f"annotated_image_{timestamp}.jpg" )
                 cv2.imwrite(img_path, annotated_image)
 
                 results['output_files'] = {
@@ -744,7 +744,7 @@ class FaceDetectionAPI:
                     results = self.pipeline.process_image(tmp_file.name, input_type="file")
 
                 # Clean up temporary file
-                os.unlink(tmp_file.name)
+                unlink ( tmp_file.name )
 
                 return jsonify(results)
 
@@ -767,7 +767,7 @@ class FaceDetectionAPI:
 
 # ==================== USAGE EXAMPLES ====================
 
-def main():
+def main() -> object:
     """Example usage of the face detection pipeline."""
 
     # Initialize pipeline with different detectors
@@ -794,14 +794,14 @@ def main():
     print("\n=== Starting REST API server ===")
     api = FaceDetectionAPI(pipeline_opencv)
     print("API server starting on http://localhost:5000")
-    # api.run(port=5000, debug=True)  # Uncomment to run server
+    api.run(port=5000, debug=True)  # comment to not run server
 
 
 if __name__ == "__main__":
     main()
-from face_pipeline import FaceDetectionPipeline, FaceDetectionAPI
-
-if __name__ == "__main__":
-    pipeline = FaceDetectionPipeline(detector_type="opencv")  # or use "mtcnn" as needed
-    api = FaceDetectionAPI(pipeline)
-    api.run(host="0.0.0.0", port=5000, debug=True)
+# from face_pipeline import FaceDetectionPipeline, FaceDetectionAPI
+#
+# if __name__ == "__main__":
+#     pipeline = FaceDetectionPipeline(detector_type="opencv")  # or use "mtcnn" as needed
+#     api = FaceDetectionAPI(pipeline)
+#     api.run(host="0.0.0.0", port=5000, debug=True)

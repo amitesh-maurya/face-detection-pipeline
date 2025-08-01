@@ -3,11 +3,12 @@ A plug-and-play, production-ready face detection pipeline with support for OpenC
 Works with images, URLs, webcam streams, base64 strings, and ships with a REST API (Flask) outta the box.
 
 🚀 Features
+
 Multi-Detector Flex → OpenCV Haar, MTCNN, Dlib, or face_recognition
 
 Any Input You Throw At It → Files, URLs, Base64, webcams, numpy arrays
 
-Pro Preprocessing → Resize, grayscale, histogram equalization, blur, gamma correction
+Preprocessing → Resize, grayscale, histogram equalization, blur, gamma correction
 
 Smart Post-processing → Confidence thresholding, NMS, bounding box refinements
 
@@ -25,18 +26,15 @@ Requirements: Python 3.8+
 bash
 Copy
 Edit
-git clone https://github.com/your-username/your-repo-name.git  
+git clone https://github.com/amitesh-maurya/face-detection-pipeline.git  
 cd your-repo-name  
 pip install -r requirements.txt
 Heads up: dlib & face_recognition may need system-level packages.
 
 🖥️ Usage
 Python Script
-python
-Copy
-Edit
-from face_pipeline import FaceDetectionPipeline
 
+from face_pipeline import FaceDetectionPipeline
 pipeline = FaceDetectionPipeline(detector_type="opencv")
 results = pipeline.process_image("test.jpg", input_type="file", save_output=True)
 print(results)
@@ -50,13 +48,10 @@ python
 Copy
 Edit
 results = pipeline.process_image(0, input_type="webcam", save_output=True)
+
 🌐 REST API
 Run server:
 
-bash
-Copy
-Edit
-python your_script.py  
 # or
 export FLASK_APP=your_api_module.py && flask run
 API default: http://localhost:5000
@@ -69,26 +64,22 @@ POST /api/detect/upload → File upload
 GET /api/health → Status check
 
 Curl Sample
-bash
-Copy
-Edit
 curl -X POST http://localhost:5000/api/detect \
   -H "Content-Type: application/json" \
   -d '{"image_url": "https://path.to/image.jpg"}'
+  
 ⚙️ Config
-python
-Copy
-Edit
+
 pipeline = FaceDetectionPipeline(
     detector_type="mtcnn",  # opencv | mtcnn | dlib | face_recognition
     confidence_threshold=0.8,
     nms_threshold=0.4,
     target_size=(640, 480)
 )
+
 📦 Output Example
 json
-Copy
-Edit
+
 {
   "status": "success",
   "timestamp": "2025-08-01T23:55:00Z",
@@ -124,3 +115,4 @@ Add badges (like Python version, license, build passing)?
 Throw in cool emoji section headers everywhere?
 
 Make it look like a GitHub trending project (with shields + collapsible sections)?
+

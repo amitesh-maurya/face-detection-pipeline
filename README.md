@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 ### Python (Script)
 ```python
-from face_pipeline import FaceDetectionPipeline
+from face_detection_pipeline import FaceDetectionPipeline
 
 pipeline = FaceDetectionPipeline(detector_type="opencv")
 results = pipeline.process_image("test_image.jpg", input_type="file", save_output=True)

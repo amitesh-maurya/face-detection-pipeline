@@ -100,7 +100,7 @@ pipeline = FaceDetectionPipeline(
   "face_count": 2,
   "faces": [
     {
-      "face_id": "face_0_20250801_235500",
+      "face_id": "AmiteshFD_0_20250801_235500",
       "bounding_box": {"x": 100, "y": 80, "width": 60, "height": 60},
       "confidence": 0.9921,
       "detector_used": "mtcnn",

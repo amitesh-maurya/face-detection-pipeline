@@ -1,0 +1,45 @@
+{
+  "status": "success",
+  "timestamp": "2025-08-02T22:49:42.718472",
+  "face_count": 2,
+  "faces": [
+    {
+      "face_id": "face_0_20250802_224942",
+      "bounding_box": {
+        "x": 401,
+        "y": 219,
+        "width": 72,
+        "height": 72
+      },
+      "confidence": 0.9,
+      "detector_used": "opencv_haar",
+      "metadata": {
+        "area": 5184,
+        "aspect_ratio": 1.0,
+        "center": [
+          437,
+          255
+        ]
+      }
+    },
+    {
+      "face_id": "face_1_20250802_224942",
+      "bounding_box": {
+        "x": 15,
+        "y": 135,
+        "width": 86,
+        "height": 86
+      },
+      "confidence": 0.9,
+      "detector_used": "opencv_haar",
+      "metadata": {
+        "area": 7396,
+        "aspect_ratio": 1.0,
+        "center": [
+          58,
+          178
+        ]
+      }
+    }
+  ]
+}

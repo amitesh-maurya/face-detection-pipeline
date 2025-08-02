@@ -35,7 +35,7 @@ def _calculate_face_metrics(faces: List[Dict]) -> List[Dict]:
         face['center'] = [x + w // 2, y + h // 2]
 
         # Add unique face ID
-        face['face_id'] = f"face_{i}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        face['face_id'] = f"AmiteshFD_{i}_{datetime.now().strftime( '%d/%m/%y_%H:%M:%S' )}"
 
     return faces
 
@@ -109,7 +109,7 @@ def capture_from_webcam(camera_index: int = 0) -> np.ndarray:
         Captured frame as numpy array
     """
     try:
-        cap = cv2.VideoCapture(camera_index)[5]
+        cap = cv2.VideoCapture(camera_index)
         if not cap.isOpened():
             raise RuntimeError(f"Could not open camera {camera_index}")
 
@@ -201,7 +201,7 @@ def load_image_from_file(image_path: str) -> np.ndarray:
         if not path.exists( image_path ):
             raise FileNotFoundError(f"Image file not found: {image_path}")
 
-        image = cv2.imread(image_path)[1][2][5]
+        image = cv2.imread( image_path )
         if image is None:
             raise ValueError(f"Could not load image from {image_path}")
 
@@ -233,7 +233,7 @@ def draw_detections(image: np.ndarray, faces: List[Dict]) -> np.ndarray:
             confidence = face['confidence']
 
             # Draw bounding box
-            var = cv2.rectangle ( result_image, (x, y), (x + w, y + h), (0, 255, 0), 2 )[1][2][8]
+            var = cv2.rectangle ( result_image, (x, y), (x + w, y + h), (0, 255, 0), 2 )
 
             # Draw confidence score
             label = f"{confidence:.2f}"
@@ -351,7 +351,7 @@ class FaceDetectionPipeline:
             processed_image = self._resize_image(processed_image)
 
             # 2. Convert to grayscale for detection
-            gray_image = cv2.cvtColor(processed_image, cv2.COLOR_BGR2GRAY)[1][2][5]
+            gray_image = cv2.cvtColor(processed_image, cv2.COLOR_BGR2GRAY)
 
             # 3. Apply histogram equalization for better contrast[9][12]
             equalized_image = cv2.equalizeHist(gray_image)
@@ -437,7 +437,7 @@ class FaceDetectionPipeline:
             minNeighbors=5,
             minSize=(30, 30),
             flags=cv2.CASCADE_SCALE_IMAGE
-        )[1][2][14]
+        )
 
         detected_faces = []
         for (x, y, w, h) in faces:
@@ -796,12 +796,6 @@ def main() -> object:
     print("API server starting on http://localhost:5000")
     api.run(port=5000, debug=True)  # comment to not run server
 
-
 if __name__ == "__main__":
     main()
-# from face_pipeline import FaceDetectionPipeline, FaceDetectionAPI
-#
-# if __name__ == "__main__":
-#     pipeline = FaceDetectionPipeline(detector_type="opencv")  # or use "mtcnn" as needed
-#     api = FaceDetectionAPI(pipeline)
-#     api.run(host="0.0.0.0", port=5000, debug=True)
+

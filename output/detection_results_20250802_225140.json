@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "timestamp": "2025-08-02T22:51:40.359203",
+  "face_count": 1,
+  "faces": [
+    {
+      "face_id": "AmiteshFD_0_2025/08/02_22:51:40",
+      "bounding_box": {
+        "x": 273,
+        "y": 372,
+        "width": 96,
+        "height": 96
+      },
+      "confidence": 0.9,
+      "detector_used": "opencv_haar",
+      "metadata": {
+        "area": 9216,
+        "aspect_ratio": 1.0,
+        "center": [
+          321,
+          420
+        ]
+      }
+    }
+  ]
+}

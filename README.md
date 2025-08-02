@@ -61,7 +61,7 @@ results = pipeline.process_image(0, input_type="webcam", save_output=True)
 
 ### Run the API
 ```bash
-python your_script.py
+python face_detection_pipeline.py
 # or
 export FLASK_APP=face_detection_pipeline.py && flask run
 ```
@@ -73,12 +73,17 @@ API runs at: **http://localhost:5000**
 - **POST** `/api/detect/upload` → Multipart file upload (file field)  
 - **GET** `/api/health` → API health status  
 
-#### Example with curl:
+## 🌐 Gradio UI
+
+### Run the UI
 ```bash
-curl -X POST http://localhost:5000/api/detect     -H "Content-Type: application/json"     -d '{"image_url":"https://path.to/image.jpg"}'
+python gradio_ui.py
+
 ```
 
----
+API runs at: **http://127.0.0.1:7860**
+#### Example with curl:
+
 
 ## ⚙️ Configuration
 ```python
